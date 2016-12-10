@@ -29,11 +29,10 @@
 move_speed = 100;
 max_xspeed = 3.5;
 jumping = false;
-
+shealth = 100
 start_x = x;
 start_y = y;
 image_speed = 0;
-
 </string>
           </argument>
         </arguments>
@@ -68,6 +67,52 @@ if phy_speed_x &lt; 0.5 &amp;&amp; phy_speed_y &lt; 0.5{
     background_hspeed[0] = 0.5
     background_vspeed[0] = 0.5
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy_bullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>shealth -= 5
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_ufo">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>shealth -= 5
 </string>
           </argument>
         </arguments>
@@ -160,7 +205,7 @@ phy_angular_velocity += 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>physics_apply_local_force(0,-37,0,-750);
+            <string>physics_apply_local_force(0,-37,0,-1200);
 </string>
           </argument>
         </arguments>
@@ -190,29 +235,7 @@ phy_angular_velocity -= 2
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>112</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_wrap</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>4</kind>
-            <string>2</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -229,24 +252,8 @@ phy_angular_velocity -= 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///DRAW MINIMAP
-/*
-
-map_surf = surface_create(150,150);
-
-surface_set_target(map_surf);
-
-draw_clear(c_black);  //or whatever background you want for the map
-
-d3d_set_projection_ortho(0,0,room_width,room_height,0);  //set projection to whole room
-
-var _scale = room_height / 200;  //calculate scale of icons
-
-with (obj_ufo) { draw_sprite_ext(spr_ufo,obj_ufo.image_index,640,0,_scale,_scale,0,c_white,1); }  //draw map icons
-
-surface_reset_target();
-
-draw_surface(map_surf,0,0);  //the map surface can be drawn anywere on the screen.
+            <string>draw_self();
+draw_healthbar(phy_position_x - 150,phy_position_y - 100, phy_position_x + 150,phy_position_y - 115, shealth, c_black, c_lime, c_lime, 0, true, true);
 </string>
           </argument>
         </arguments>
@@ -271,7 +278,7 @@ draw_surface(map_surf,0,0);  //the map surface can be drawn anywere on the scree
             <kind>1</kind>
             <string>with (instance_create(phy_position_x, phy_position_y, obj_player_bullet))
     {
-    phy_rotation = other.phy_rotation
+    phy_rotation = obj_player.phy_rotation
     phy_bullet = true;
     physics_apply_local_impulse(0, 10, 0, -200);
     }
