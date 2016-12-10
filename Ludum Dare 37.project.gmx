@@ -13,6 +13,12 @@
       <sprite>sprites\spr_ship_2</sprite>
       <sprite>sprites\spr_ship_3</sprite>
     </sprites>
+    <sprites name="UFO">
+      <sprite>sprites\spr_ufo</sprite>
+    </sprites>
+    <sprite>sprites\spr_explosion</sprite>
+    <sprite>sprites\spr_player_bullet</sprite>
+    <sprite>sprites\spr_player_bullet_hit</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\black</background>
@@ -29,6 +35,8 @@
     <object>objects\obj_ground</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_camera</object>
+    <object>objects\obj_ufo</object>
+    <object>objects\obj_player_bullet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>

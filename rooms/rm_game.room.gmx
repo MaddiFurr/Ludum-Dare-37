@@ -6,7 +6,7 @@
   <vsnap>64</vsnap>
   <hsnap>64</hsnap>
   <isometric>0</isometric>
-  <speed>144</speed>
+  <speed>60</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
@@ -64,6 +64,7 @@
     <instance objName="obj_wall" x="0" y="3008" name="inst_1025C569" locked="0" code="" scaleX="47" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall" x="3008" y="0" name="inst_9FBA2E9D" locked="0" code="" scaleX="1" scaleY="47" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall" x="0" y="-64" name="inst_4053ADA2" locked="0" code="" scaleX="47" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ufo" x="1024" y="512" name="inst_80949675" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>
