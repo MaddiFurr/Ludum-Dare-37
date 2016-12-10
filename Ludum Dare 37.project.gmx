@@ -16,10 +16,16 @@
     <sprites name="UFO">
       <sprite>sprites\spr_ufo</sprite>
     </sprites>
-    <sprite>sprites\spr_player_bullet</sprite>
-    <sprite>sprites\spr_player_bullet_hit</sprite>
-    <sprite>sprites\spr_explosion</sprite>
-    <sprite>sprites\spr_enemy_1</sprite>
+    <sprites name="Enemies">
+      <sprite>sprites\spr_enemy_1</sprite>
+    </sprites>
+    <sprites name="FX">
+      <sprite>sprites\spr_player_bullet</sprite>
+      <sprite>sprites\spr_explosion</sprite>
+      <sprite>sprites\spr_player_bullet_hit</sprite>
+      <sprite>sprites\spr_enemy_bullet</sprite>
+      <sprite>sprites\spr_enemy_bullet_hit</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\black</background>
@@ -38,6 +44,7 @@
     <object>objects\obj_camera</object>
     <object>objects\obj_ufo</object>
     <object>objects\obj_player_bullet</object>
+    <object>objects\obj_enemy_bullet</object>
     <object>objects\obj_enemy</object>
   </objects>
   <rooms name="rooms">

@@ -26,6 +26,74 @@
           <argument>
             <kind>1</kind>
             <string>image_speed = 0
+shealth = 100
+start_bullet = true
+fire_dir = 0
+fire_inst = 0
+fire_player = 0
+max_speed = 3.5
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>sprite_index = spr_explosion
+image_speed = 0.5
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if instance_number(obj_ufo) != 0{
+fire_inst = instance_nearest(phy_position_x,phy_position_y,obj_ufo);
+fire_player = instance_nearest(phy_position_x,phy_position_y,obj_player);
+fire_dir = -point_direction(phy_position_x, phy_position_y, fire_inst.phy_position_x, fire_inst.phy_position_y);
+with (instance_create(phy_position_x, phy_position_y, obj_enemy_bullet))
+    {
+//    fire_inst = instance_nearest(phy_position_x,phy_position_y,obj_ufo);
+//    fire_player = instance_nearest(phy_position_x,phy_position_y,obj_player);
+//    fire_dir = -point_direction(phy_position_x, phy_position_y, fire_inst.phy_position_x, fire_inst.phy_position_y);
+//    phy_rotation = -fire_dir;
+    phy_rotation = (other.phy_rotation - 180)
+    phy_bullet = true;
+    physics_apply_local_impulse(0, 10, 0, -200);
+    }
+alarm[0] = 240
+}
 </string>
           </argument>
         </arguments>
@@ -48,13 +116,142 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>inst = instance_nearest(phy_position_x,phy_position_y,obj_ufo)
+            <string>if instance_number(obj_ufo) != 0{
 
+inst = instance_nearest(phy_position_x,phy_position_y,obj_ufo);
+player = instance_nearest(phy_position_x,phy_position_y,obj_player);
 
 ufo_dir = -point_direction(phy_position_x, phy_position_y, inst.phy_position_x, inst.phy_position_y);
-phy_rotation = ufo_dir - 90
+phy_rotation = ufo_dir - 90;
+if phy_speed &gt; max_speed
+{
+    phy_speed_x = max_speed
+    phy_speed_y = max_speed
+} else{
+physics_apply_local_impulse(0, 10, 0, 5);
+}
+
+dis = point_distance(phy_position_x, phy_position_y,inst.phy_position_x,inst.phy_position_y);
+if dis &lt; 250{
+    phy_speed_x = 0;
+    phy_speed_y = 0;
+}
+if start_bullet = true{
+if dis &lt; 300{
+    alarm[0] = 1
+    start_bullet = false
+}
+}
 
 
+if !instance_exists(inst){
+    start_bullet = true
+}
+
+if shealth &lt;= 0
+{
+alarm[1] = 1
+}
+
+if image_index = 8
+{
+    instance_destroy();
+}
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//hit a friend
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_player_bullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>shealth -= 50
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_player">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//collide
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+draw_healthbar(phy_position_x - 150,phy_position_y - 100, phy_position_x + 150,phy_position_y - 115, shealth, c_black, c_red, c_lime, 0, true, true);
 </string>
           </argument>
         </arguments>
@@ -65,9 +262,9 @@ phy_rotation = ufo_dir - 90
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>1</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
+  <PhysicsObjectRestitution>1</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>1</PhysicsObjectLinearDamping>
+  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>1</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
